@@ -47,7 +47,8 @@ let squares = ["Dad mocks weed smokers with retarded face",
   "DONT BE GAY",
   "DONT BE DUMB",
   "Mom interrupts argument",
-  "michael trashes mom",
+  "michael trashes mom", 
+  "mom says idgaf","mom starts dancing","when eric mentions losing NNN","el grito is mentioned","when eric mentions nicotine"
   ]
 
 function shuffle(array) {
