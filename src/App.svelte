@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
 
 let squares = ["Dad mocks weed smokers with retarded face",
  "Ewy mentions Gloria shouldn't have never came last year",
@@ -21,6 +23,10 @@ let squares = ["Dad mocks weed smokers with retarded face",
   "Boiii!",
   "Gurllll!",
   "Michael rolls his eyes",
+  "Roxana rolls her eyes",
+  "Michael Roxana flirt",
+  "michael roxana kiss",
+  "michael roxana do gay shit",
   "Mom overparents",
   "Roxana slays the house down boots purr",
   "Ewy & dewy wrestle",
@@ -33,6 +39,10 @@ let squares = ["Dad mocks weed smokers with retarded face",
   "Mom asks how their Thanksgiving went",
   "Mr Ramirez gambles?",
   "Ewy tries speaking gringo Spanish",
+  "Moustache Mentioned",
+  "David shits on somebody",
+  "David brings up success",
+  "MCHHHHE"
   ]
 
 function shuffle(array) {
@@ -56,28 +66,67 @@ function shuffle(array) {
 
   shuffle(squares)
 
-  squares = squares.slice(0,24);
+  squares = squares.slice(0,25);
+  
+  squares[12] = "Free Spot"
 
   
+  
+  let allSquares = new Array(25).map((square) => "")
+  
+  const onClick = (e: any) => {
+    
+    const selected = e.target.classList.contains("square") ? e.target : e.target.closest(".square");
+    
+    
+    console.log(selected)
+    
+    if (allSquares[selected.id] === "selected") {
+      allSquares[selected.id] = ""
+      
+    } else {
+      
+      allSquares[selected.id] = "selected"
+    }
+    
+    
+    localStorage.setItem("selected", JSON.stringify(allSquares))
+  }
+  
+onMount(() => {
+  const lSquare = localStorage.getItem("squares")!;
+  const parsed = JSON.parse(lSquare)
+
+  
+  // console.log(parsed)
+  if (!parsed) {
+    localStorage.setItem("squares", JSON.stringify(squares));
+  } else {
+    squares = parsed;
+
+    const selected = localStorage.getItem("selected")!
+    const ok = JSON.parse(selected)
+    console.log(ok)
+    allSquares = ok
+    // allSquares = JSON.parse(localStorage.getItem("selected")!);
+    // const selectedJ = localStorage.getItem("selected")!;
+    // allSquares = JSON.parse(selectedJ)
+  }
+})
+
 </script>
 
 <main>
   <div class="grid">
 
-    {#each squares as square}
-      <div class="square">
+    {#each squares as square, index}
+      <div class={`square ${allSquares[index]}`} on:click={onClick} id={index}>
         <div>
           {square}
         </div>
       </div>
     {/each}
 
-    <div class="square free">
-      <div>
-        Free
-      </div>
-    </div>
-    
   </div>
 </main>
 
@@ -96,6 +145,11 @@ function shuffle(array) {
 
  .square {
   box-shadow: 0 0 0 2px black;
+ }
+
+ .selected {
+  background-color: black !important;
+  color: white !important;
  }
 
  .square div {
