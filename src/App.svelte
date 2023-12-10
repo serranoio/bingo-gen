@@ -90,6 +90,7 @@ const Themes: Theme[] = [{
   "ewy hits penjamin",
   "mewy hits penjamin",
   "roxy hits penjamin",
+  "aosijdaio0sjdaosidjaoisjdaoisjdcAOISDjcosdjfs0oidjfsao0j0ij",
 ], 
 },
 {
@@ -104,7 +105,7 @@ const Themes: Theme[] = [{
 "Dad brings booze",
 "Mom gets offended or upset",
 "Michael peer pressures eric",
-"David wines about dinner time",
+"David whines about dinner time",
 "Michael finishes his food last",
 "Michael takes a shit with his phone and texts bubby",
 "Michael misses bubby"]
@@ -237,10 +238,16 @@ const changeThemeHandler = (e: any) => {
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
   display: grid;
+  max-width: 100%;
+  /* width: calc(100vw - 4rem); */
  }
 
  .square {
   box-shadow: 0 0 0 2px black;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break:break-all;
+  /* word-break:; */
  }
 
  .selected {
@@ -267,5 +274,9 @@ const changeThemeHandler = (e: any) => {
  .square.free {
   grid-column: 3/4;
   grid-row: 3/4;
+ }
+
+ .square {
+  padding: .6rem;
  }
 </style>
